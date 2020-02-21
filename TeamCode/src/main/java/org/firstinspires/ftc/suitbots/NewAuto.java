@@ -406,16 +406,14 @@ public class NewAuto extends LinearOpMode {
     }
     public void liftToIndex(int index){
         double[] heights = {0, 1.65, 2.8, 7, 10.8};
-        int level = 0;
-        lift.setTargetPosition(convertLiftHeightToEncoderTicks(heights[level]));
+        lift.setTargetPosition(convertLiftHeightToEncoderTicks(heights[index]));
         lift.setPower(0.5);
         lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        while(opModeIsActive() && lf.isBusy() || lr.isBusy() || rf.isBusy() || rr.isBusy()){
+        while(opModeIsActive() && lift.isBusy()){
             idle();
         }
-      //  sleep(420);
+        sleep(500);
     }
-    //Here is the problem ^
 
     @Override
     public void runOpMode(){
@@ -542,24 +540,25 @@ public class NewAuto extends LinearOpMode {
 
         //sleep(pause);
 
-        ///*
+        lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         if(position == buildingSiteSide){
             //lift
             liftToIndex(1);
             //drive to platform
-            driveInches(24);
+            driveInches(35);
             //hook onto platform
             liftToIndex(0);
             //drive back with platform
-            driveInches(-25);
+            driveInches(-38);
             //unhook
             liftToIndex(1);
             //start strafing over to the bridge
-            driveInches(15, colourIsRed ? driveLeft : driveRight);
+            driveInches(20, colourIsRed ? driveLeft : driveRight);
             //drop lift to fit under bridge
             liftToIndex(0);
             //drive under the bridge
-            driveInches(15, colourIsRed ? driveLeft : driveRight);
+            driveInches(20, colourIsRed ? driveLeft : driveRight);
 
             //stop all motors
             setMotorPower(0, lf, lr, rf, rr, lintake, rintake, lift);
@@ -605,9 +604,7 @@ public class NewAuto extends LinearOpMode {
             passiveIntake(false);
         }
         else if(position == dumb){
-            liftToIndex(0);
-            liftToIndex(1);
-            //driveInches(30);
+            driveInches(30);
         }
     }
 }
