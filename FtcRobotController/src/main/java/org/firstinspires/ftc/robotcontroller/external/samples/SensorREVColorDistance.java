@@ -53,7 +53,7 @@ import java.util.Locale;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list.
  */
 @TeleOp(name = "Sensor: REVColorDistance", group = "Sensor")
-@Disabled                            // Comment this out to add to the opmode list
+//@Disabled                            // Comment this out to add to the opmode list
 public class SensorREVColorDistance extends LinearOpMode {
 
     /**
@@ -74,7 +74,7 @@ public class SensorREVColorDistance extends LinearOpMode {
      * very accurate distance is required you should consider calibrating the raw optical values read from the
      * chip to your exact situation.
      *
-     * Although you configure a single REV Robotics Color-Distance sensor in your configuration file,
+ \    * Although you configure a single REV Robotics Color-Distance sensor in your configuration file,
      * you can treat the sensor as two separate sensors that share the same name in your op mode.
      *
      * In this example, we represent the detected color by a hue, saturation, and value color

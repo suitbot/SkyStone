@@ -3,12 +3,12 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 public class EKPublishThing extends OpMode {
 
     @Override
-    public void loop() {
+    public void init() {
 
     }
 
     @Override
-    public void init() {
+    public void loop() {
 
     }
 }
