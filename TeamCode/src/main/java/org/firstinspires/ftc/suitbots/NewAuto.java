@@ -197,6 +197,18 @@ public class NewAuto extends LinearOpMode {
     public void driveInches(int dist){
         this.driveInches(dist, forward);
     }
+    public void driveInchesSpeed(int dist, double speed){
+        stpResetEncoders();
+        setTarPos(inches(dist));
+        runToPosition();
+        setMotorPower(speed);
+        while(lf.isBusy() && lr.isBusy() && rf.isBusy() && rr.isBusy() && opModeIsActive()){
+            idle();
+        }
+        runUsingEnc();
+        setMotorPower(0);
+        sleep(500);
+    }
     public void driveInchesHarvesting(int dist, boolean willPassiveIntake) {
         intake(IN);
         stpResetEncoders();
@@ -546,7 +558,7 @@ public class NewAuto extends LinearOpMode {
             //lift
             liftToIndex(1);
             //drive to platform
-            driveInches(35);
+            driveInchesSpeed(35, 0.3);
             //hook onto platform
             liftToIndex(0);
             //drive back with platform
@@ -564,8 +576,6 @@ public class NewAuto extends LinearOpMode {
             setMotorPower(0, lf, lr, rf, rr, lintake, rintake, lift);
         }
         else if(position == quarrySide){
-            ///*
-            int setUp = 1;
             //pick up the first stone
             driveInchesHarvesting(45, true);
             //back up to get under the bridge
